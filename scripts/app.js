@@ -6,6 +6,8 @@ const passwordInput = document.querySelector("#password");
 const emailInput = document.querySelector("#email");
 const phoneInput = document.querySelector("#phone");
 
+inputs = [nameInput, surnameInput, passwordInput, emailInput, phoneInput];
+
 const regExp = {
   name: {
     regExp: /^[a-zA-Z]{2,}$/,
@@ -25,7 +27,62 @@ const regExp = {
     message: "Invalid email",
   },
   phone: {
-    regExp: /^\+?3?8?(0\d{9})$/,
+    regExp: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
     message: "Invalid phone number",
   },
 };
+
+const validateInput = (input, regExp, message) => {
+  const inputValue = input.value;
+  const inputName = input.name;
+  const small = input.nextElementSibling;
+  input.classList.add("invalid");
+  if (inputValue === "") {
+    small.classList.add("active");
+    small.classList.remove("removed");
+    small.innerText = `${inputName} is required`;
+  } else if (!inputValue.match(regExp)) {
+    small.classList.add("active");
+    small.classList.remove("removed");
+    small.innerText = message;
+  } else {
+    input.classList.remove("invalid");
+    small.innerText = "";
+    small.classList.remove("active");
+    small.classList.add("removed");
+  }
+};
+
+inputs.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    const inputName = input.name;
+    const currentRegExp = regExp[inputName].regExp;
+    const message = regExp[inputName].message;
+    validateInput(input, currentRegExp, message);
+    input.addEventListener(
+      "blur",
+      (e) => {
+        const inputName = input.name;
+        const currentRegExp = regExp[inputName].regExp;
+        const message = regExp[inputName].message;
+        validateInput(input, currentRegExp, message);
+      },
+      { once: true }
+    );
+  });
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  inputs.forEach((input) => {
+    const inputName = input.name;
+    const currentRegExp = regExp[inputName].regExp;
+    const message = regExp[inputName].message;
+    validateInput(input, currentRegExp, message);
+  });
+
+  const invalidInputs = document.querySelectorAll("input.invalid");
+  if (invalidInputs.length == 0) {
+    form.submit();
+  }
+});

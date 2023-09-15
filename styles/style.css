@@ -17,6 +17,7 @@ form {
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: scale 0.5s ease-in-out;
 }
 
 form button {
@@ -33,10 +34,17 @@ form button:active {
   background-color: #ccc;
 }
 
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
 label > span {
   display: inline-block;
   min-width: 100px;
 }
+
 input.invalid {
   border-color: #900;
   background-color: #fdd;
@@ -49,14 +57,19 @@ input:focus.invalid {
 .error {
   width: 100%;
   padding: 0;
-
   font-size: 80%;
   color: white;
   background-color: #900;
   border-radius: 0 0 5px 5px;
   box-sizing: border-box;
+  transition: padding 0.3s ease-in-out, background-color 0.1s ease-in-out;
 }
 
 .error.active {
   padding: 0.3em;
+}
+
+.error.removed {
+  width: 100%;
+  background-color: greenyellow;
 }

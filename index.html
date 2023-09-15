@@ -10,31 +10,36 @@
   <body>
     <form>
       <label>
-        <span>Name</span>
+        <span>Name*</span>
         <input type="text" name="name" id="name" />
         <span class="error" aria-live="polite"></span>
       </label>
 
       <label>
-        <span>Surname</span>
+        <span>Surname*</span>
         <input type="text" name="surname" id="surname" />
         <span class="error" aria-live="polite"></span>
       </label>
 
       <label>
-        <span>Password</span>
-        <input type="password" name="password" id="password" />
+        <span>Password*</span>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          autocomplete="new-password"
+        />
         <span class="error" aria-live="polite"></span>
       </label>
 
       <label>
-        <span>Email</span>
+        <span>Email*</span>
         <input type="email" name="email" id="email" />
         <span class="error" aria-live="polite"></span>
       </label>
 
       <label>
-        <span>Phone</span>
+        <span>Phone*</span>
         <input type="tel" name="phone" id="phone" />
         <span class="error" aria-live="polite"></span>
       </label>
